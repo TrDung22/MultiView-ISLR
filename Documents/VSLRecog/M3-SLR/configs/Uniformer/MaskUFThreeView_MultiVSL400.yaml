@@ -1,0 +1,82 @@
+task: ISLR
+data:
+  model_name: MaskUFThreeView
+  base_url: /home/ibmelab/Documents/GG/VSLRecognition/vsl
+  dataset_name: VN_SIGN
+  temporal_stride: 2
+  num_output_frames: 16
+  crop_two_hand: false
+  mask_ratio_left: 0.7
+  mask_ratio_center: 0.7
+  mask_ratio_right: 0.7
+  motion_aware_masking: true
+  random_drop_view: false
+  transform_cfg:
+    index_setting:
+      - segment #train_p
+      - pad #train_m
+      - segment #test_p
+      - pad #test_m
+  vid_transform:
+    IMAGE_SIZE: 224
+    NORM_MEAN_IMGNET: [0.485, 0.456, 0.406]
+    NORM_STD_IMGNET: [0.229, 0.224, 0.225]
+  SHOULDER_DIST_EPSILON: 1.2
+  WRIST_DELTA: 0.15
+  label_folder: label1-400/labelThreeViewWithGloss
+  data_type: labels
+training:
+  label_smoothing: 0
+  mixup: False
+  alpha_mixup: 0.8
+  cv_align_weights: 0.1
+  device: cuda:1
+  overwrite: true
+  log_freq: 1
+  experiment_name: "MaskUFThreeView MultiVSL200 MaxFlow mask ratio 0.7 0.7 0.7 no drop view"
+  model_dir: results/vtn_att_poseflow/vsl
+  random_seed: 42
+  shuffle: True
+  num_workers: 12
+  prefetch_factor: 2
+  batch_size: 3 #to-debug!
+  total_epoch: 150 #to-debug!
+  learning_rate: 0.0001
+  save_checkpoints: true
+  scheduler_factor: 0.1
+  scheduler_patience: 5
+  plot_loss: true
+  plot_lr: true
+  plot_acc: true
+  criterion: MultipleMSELoss
+  optimzer: Adam
+  lr_scheduler: StepLR
+  top_k: 5
+  print_stats: true
+  pretrained: false
+  pretrained_model: None
+  lr_step_size: 10
+  gamma: 0.8
+  num_accumulation_steps: 4
+  patience: 40
+  verbose: true
+  delta: 0
+  is_early_stopping: true
+  gradient_clip_val: 5
+  w_decay: 1e-4
+  log_train_step: true
+  log_steps: 50
+  evaluate_step: 250
+  evaluate_strategy: epoch
+
+inference:
+  batch_size: 8
+model:
+  num_classes: 0
+  embed_size: 512
+  pretraiend: False
+  pretrained_left: 'MaxFlowUFOneView_MultiVSL200_left'
+  pretrained_center: 'MaxFlowUFOneView_MultiVSL200_center'
+  pretrained_right: 'MaxFlowUFOneView_MultiVSL200_right'
+  co_attention: True
+  maskFeat: True
