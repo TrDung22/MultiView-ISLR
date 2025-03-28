@@ -1,0 +1,84 @@
+task: ISLR
+data:
+  model_name: HRCA
+  base_url: /home/ibmelab/Documents/GG/VSLRecognition/vsl
+  # base_url: /home/ibmelab/Documents/GG/VSLRecognition/AUTSL
+  dataset_name: VN_SIGN
+  # dataset_name: AUTSL
+  temporal_stride: 2
+  num_output_frames: 20
+  crop_two_hand: true
+  transform_cfg:
+    index_setting:
+      - segment #train_p
+      - pad #train_m
+      - segment #test_p
+      - pad #test_m
+  vid_transform:
+    IMAGE_SIZE: 224
+    NORM_MEAN_IMGNET: [0.485, 0.456, 0.406]
+    NORM_STD_IMGNET: [0.229, 0.224, 0.225]
+  SHOULDER_DIST_EPSILON: 1.2
+  WRIST_DELTA: 0.15
+  # label_folder: label
+  # label_folder: label1-200/label/labelCenterWithOrd1/labelCenterWithout29_ord1_4316_792_791
+  # label_folder: label1-200/label/labelFullView
+  # label_folder: label1-400/labelCenter1_400
+  label_folder: label1-1000/labelCenter1_1000
+  data_type: labels
+training:
+  test: true
+  coefficient:
+    cls_x: 1
+    cts_x: 1
+    cosine_x: 1
+  label_smoothing: 0
+  device: cuda:1
+  overwrite: true
+  log_freq: 1
+  experiment_name: "2s-CrossVTN finetune autsl to vsl 1000 for one view w CLS (20f yHC 01ls 8h 2a 01dr) (Testing)"
+  model_dir: results/vtn_att_poseflow/vsl
+  random_seed: 42
+  shuffle: True
+  num_workers: 12
+  prefetch_factor: 4
+  batch_size: 3 #to-debug!
+  total_epoch: 300 #to-debug!
+  learning_rate: 0.0001
+  save_checkpoints: true
+  scheduler_factor: 0.1
+  scheduler_patience: 5
+  plot_loss: true
+  plot_lr: true
+  plot_acc: true
+  criterion: MyCustomLoss
+  optimzer: Adam
+  lr_scheduler: StepLR
+  top_k: 5
+  print_stats: true
+  pretrained: true
+  pretrained_model: checkpoints/2s-CrossVTN/2s-CrossVTN finetune autsl to vsl 1000 for one view w CLS (20f yHC 01ls 8h 2a 01dr)/best_checkpoints_acc.pth
+  lr_step_size: 10
+  gamma: 0.8
+  num_accumulation_steps: 4
+  patience: 15
+  verbose: true
+  delta: 0
+  is_early_stopping: true
+  gradient_clip_val: 1
+  w_decay: 1e-4
+  log_train_step: true
+  log_steps: 50
+  evaluate_step: 250
+  evaluate_strategy: epoch
+
+inference:
+  batch_size: 8
+model:
+  num_classes: 1000
+  num_heads: 8
+  num_layers_stream: 2
+  embed_size: 512
+  cnn: rn34
+  freeze_layers: 0 # free layers in cnn
+  dropout: 0.1

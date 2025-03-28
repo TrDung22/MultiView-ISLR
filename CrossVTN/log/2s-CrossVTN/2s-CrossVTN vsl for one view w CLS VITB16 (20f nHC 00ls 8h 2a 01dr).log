@@ -1,0 +1,22 @@
+2025-01-21 11:46:16,870 [INFO] Starting 2s-CrossVTN/2s-CrossVTN vsl for one view w CLS VITB16 (20f nHC 00ls 8h 2a 01dr)...
+
+
+2025-01-21 11:48:56,590 [INFO] Starting 2s-CrossVTN/2s-CrossVTN vsl for one view w CLS VITB16 (20f nHC 00ls 8h 2a 01dr)...
+
+
+2025-01-21 11:53:35,690 [INFO] Starting 2s-CrossVTN/2s-CrossVTN vsl for one view w CLS VITB16 (20f nHC 00ls 8h 2a 01dr)...
+
+
+2025-01-21 11:56:51,341 [INFO] Starting 2s-CrossVTN/2s-CrossVTN vsl for one view w CLS VITB16 (20f nHC 00ls 8h 2a 01dr)...
+
+
+2025-01-21 12:01:28,617 [INFO] Starting 2s-CrossVTN/2s-CrossVTN vsl for one view w CLS VITB16 (20f nHC 00ls 8h 2a 01dr)...
+
+
+2025-01-21 12:03:02,706 [INFO] Starting 2s-CrossVTN/2s-CrossVTN vsl for one view w CLS VITB16 (20f nHC 00ls 8h 2a 01dr)...
+
+
+2025-01-21 12:03:56,372 [INFO] Step[50/1439]: training loss : 6.011617755889892 TRAIN  loss dict:  {'classification_loss': 6.011617755889892}
+2025-01-21 12:04:41,192 [INFO] Step[100/1439]: training loss : 5.925835008621216 TRAIN  loss dict:  {'classification_loss': 5.925835008621216}
+2025-01-21 12:05:26,168 [INFO] Step[150/1439]: training loss : 5.855757570266723 TRAIN  loss dict:  {'classification_loss': 5.855757570266723}
+2025-01-21 12:06:11,219 [INFO] Step[200/1439]: training loss : 5.7668659877777095 TRAIN  loss dict:  {'classification_loss': 5.7668659877777095}
